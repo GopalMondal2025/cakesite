@@ -287,7 +287,7 @@
     </footer>
 
     <script>
-        const BUSINESS_PHONE = "919876543210";
+        const BUSINESS_PHONE = "918017287352";
         let cart = [];
 
         // Add to Cart logic
@@ -303,14 +303,19 @@
         }
 
         // Order Now logic - adds item then scrolls to checkout
-        function orderNow(name, price) {
-            addToCart(name, price);
-            document.getElementById('cart').scrollIntoView({ behavior: 'smooth' });
-            setTimeout(() => {
-                const nameInput = document.getElementById('cust-name');
-                if (nameInput) nameInput.focus();
-            }, 600);
-        }
+       function orderNow(name, price) {
+    // Clear the cart and add only this item
+    cart = [];
+    cart.push({ name: name, price: parseInt(price), quantity: 1 });
+    updateUI();
+
+    // Scroll to checkout
+    document.getElementById('cart').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+        const nameInput = document.getElementById('cust-name');
+        if (nameInput) nameInput.focus();
+    }, 600);
+}
 
         function updateQuantity(name, delta) {
             const item = cart.find(i => i.name === name);
