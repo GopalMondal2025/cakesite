@@ -29,12 +29,13 @@
             color: var(--dark-text);
             line-height: 1.6;
             background: linear-gradient(135deg, var(--light-bg) 0%, #fff5f0 100%);
+            overflow-x: hidden;
         }
 
         /* Header & Navigation */
         header {
             background: linear-gradient(135deg, var(--primary-pink) 0%, rgba(245, 169, 169, 0.95) 100%);
-            padding: 1.5rem 0;
+            padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -47,7 +48,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 2rem;
+            padding: 0.5rem 2rem;
         }
 
         .logo {
@@ -56,12 +57,14 @@
             color: var(--dark-text);
             letter-spacing: -0.5px;
             font-style: italic;
+            white-space: nowrap;
         }
 
         .nav-links {
             display: flex;
-            gap: 3rem;
+            gap: 2rem;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
@@ -71,6 +74,7 @@
             transition: var(--transition);
             position: relative;
             font-size: 0.95rem;
+            display: block;
         }
 
         .nav-links a::after {
@@ -97,6 +101,39 @@
 
         .cart-link:hover {
             background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            gap: 6px;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: var(--dark-text);
+            border-radius: 2px;
+            transition: var(--transition);
+            display: block;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
         }
 
         /* Hero Section */
@@ -371,50 +408,6 @@
             opacity: 0.95;
         }
 
-        /* Footer */
-        footer {
-            background: var(--dark-text);
-            color: white;
-            padding: 3rem 2rem;
-            margin-top: 4rem;
-        }
-
-        footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        footer h4 {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        footer ul {
-            list-style: none;
-        }
-
-        footer a {
-            color: #bbb;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        footer a:hover {
-            color: white;
-        }
-
-        footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid #444;
-            color: #bbb;
-            font-size: 0.9rem;
-        }
-
         /* About Section */
         .about {
             max-width: 1400px;
@@ -482,23 +475,7 @@
             overflow: hidden;
         }
 
-        .about-image::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(20px, 20px); }
-        }
-
-        /* Why Choose Us Section */
+        /* Why Choose Us */
         .why-choose {
             background: linear-gradient(135deg, #faf7f5 0%, #fff5f0 100%);
             padding: 3rem 0;
@@ -622,7 +599,7 @@
             background: linear-gradient(135deg, var(--accent-red) 0%, #6b2424 100%);
             color: white;
             padding: 4rem 2rem;
-            margin: 4rem 0;
+            margin: 4rem auto;
             border-radius: 12px;
             max-width: 1400px;
             margin-left: auto;
@@ -653,7 +630,7 @@
             opacity: 0.95;
         }
 
-        /* Testimonials Section */
+        /* Testimonials */
         .testimonials {
             max-width: 1400px;
             margin: 4rem auto;
@@ -707,81 +684,133 @@
             font-size: 0.9rem;
         }
 
-        /* Responsive */
+        /* Footer */
+        footer {
+            background: var(--dark-text);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        footer h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer li {
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* ============== TABLET RESPONSIVE - 768px and below ============== */
         @media (max-width: 768px) {
-            .about-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            nav {
+                padding: 0.5rem 1rem;
             }
 
-            .about-image {
-                height: 300px;
-                font-size: 120px;
+            .logo {
+                font-size: 1.4rem;
             }
 
-            .about-text h3 {
-                font-size: 1.6rem;
+            .menu-toggle {
+                display: flex;
             }
 
-            .why-choose-grid {
-                grid-template-columns: 1fr;
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 60px;
+                flex-direction: column;
+                background: linear-gradient(135deg, var(--primary-pink) 0%, rgba(245, 169, 169, 0.95) 100%);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                gap: 0;
+                padding: 2rem 0;
+                box-shadow: var(--shadow);
+                z-index: 999;
             }
 
-            .team-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            .nav-links.active {
+                left: 0;
             }
 
-            .values-grid {
-                grid-template-columns: 1fr;
+            .nav-links li {
+                padding: 1rem 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             }
 
-            .testimonials-grid {
-                grid-template-columns: 1fr;
+            .nav-links a {
+                display: block;
+                padding: 1rem;
+                font-size: 1rem;
             }
 
-            .about {
-                margin: 2rem 1rem;
+            .nav-links a::after {
+                display: none;
             }
 
-            .values-section {
-                margin: 4rem 1rem;
+            .cart-link {
+                background: var(--accent-red);
+                color: white;
+                padding: 0.8rem 1.5rem;
+                margin: 1rem auto;
+                display: inline-block;
+                border-radius: 25px;
+                font-size: 1rem;
             }
+
             .hero {
                 grid-template-columns: 1fr;
                 padding: 2rem 1rem;
                 min-height: auto;
                 gap: 2rem;
+                margin-top: 1rem;
             }
 
             .hero-content h1 {
                 font-size: 2.2rem;
+                line-height: 1.2;
             }
 
-            .nav-links {
-                gap: 1.5rem;
-                font-size: 0.9rem;
+            .hero-content p {
+                font-size: 1rem;
             }
 
-            nav {
-                padding: 0 1rem;
-            }
-
-            .logo {
-                font-size: 1.3rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .products-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .products {
-                padding: 2rem 1rem;
-                margin: 0;
+            .hero-btn {
+                padding: 0.9rem 2rem;
+                font-size: 0.95rem;
+                width: auto;
             }
 
             .cake-showcase {
@@ -789,39 +818,471 @@
                 height: 300px;
             }
 
-            footer-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-content h1 {
-                font-size: 1.8rem;
-            }
-
-            .logo {
-                font-size: 1.1rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.8rem;
-            }
-
             .section-title {
-                font-size: 1.6rem;
+                font-size: 2rem;
+            }
+
+            .products {
+                padding: 2rem 1rem;
+                margin: 2rem auto 0;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .product-image {
+                height: 240px;
+                font-size: 80px;
             }
 
             .product-name {
+                font-size: 1.3rem;
+            }
+
+            .product-description {
+                font-size: 0.9rem;
+            }
+
+            .about {
+                margin: 2rem 1rem;
+                padding: 2rem 1.5rem;
+            }
+
+            .about-header h2 {
+                font-size: 2rem;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-text h3 {
+                font-size: 1.6rem;
+            }
+
+            .about-image {
+                height: 300px;
+                font-size: 120px;
+            }
+
+            .why-choose {
+                padding: 2rem 0;
+                margin: 3rem 0;
+            }
+
+            .why-choose-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1.5rem;
+                padding: 0 1rem;
+            }
+
+            .why-card {
+                padding: 1.5rem;
+            }
+
+            .why-card-icon {
+                font-size: 2.5rem;
+            }
+
+            .team-section {
+                padding: 0 1rem;
+            }
+
+            .team-section h3 {
+                font-size: 1.8rem;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .team-photo {
+                height: 240px;
+                font-size: 80px;
+            }
+
+            .values-section {
+                margin: 2rem 1rem;
+                padding: 2rem 1.5rem;
+            }
+
+            .values-section h3 {
+                font-size: 1.8rem;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .testimonials {
+                padding: 0 1rem;
+            }
+
+            .testimonials h3 {
+                font-size: 1.8rem;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            footer {
+                padding: 2rem 1rem;
+            }
+
+            footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .special-banner {
+                margin: 1.5rem 1rem;
+                padding: 1.5rem;
+            }
+
+            .special-banner h3 {
                 font-size: 1.2rem;
+            }
+        }
+
+        /* ============== MOBILE RESPONSIVE - 480px and below ============== */
+        @media (max-width: 480px) {
+            header {
+                padding: 0.8rem 0;
+            }
+
+            nav {
+                padding: 0.5rem 0.8rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .menu-toggle {
+                width: 40px;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .menu-toggle span {
+                width: 24px;
+                height: 2.5px;
+            }
+
+            .hero {
+                padding: 1.5rem 0.8rem;
+                gap: 1.5rem;
+                min-height: auto;
+            }
+
+            .hero-content h1 {
+                font-size: 1.6rem;
+                line-height: 1.3;
+                margin-bottom: 1rem;
+            }
+
+            .hero-content p {
+                font-size: 0.95rem;
+                margin-bottom: 1.5rem;
+                line-height: 1.6;
+            }
+
+            .hero-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                width: auto;
+            }
+
+            .cake-showcase {
+                max-width: 200px;
+                height: 200px;
+                margin-bottom: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .section-title::after {
+                width: 50px;
+            }
+
+            .products {
+                padding: 1.5rem 0.8rem;
+                margin-top: 1.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .product-image {
+                height: 200px;
+                font-size: 80px;
+            }
+
+            .product-info {
+                padding: 1.5rem 1rem;
+            }
+
+            .product-name {
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .product-description {
+                font-size: 0.85rem;
+                min-height: auto;
+                margin-bottom: 1rem;
+            }
+
+            .product-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+                padding-bottom: 1rem;
+            }
+
+            .price-tag {
+                padding: 0.4rem 0.8rem;
+                font-size: 1rem;
             }
 
             .product-footer {
                 flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .add-to-cart {
+                padding: 0.8rem;
+                font-size: 0.9rem;
             }
 
             .wishlist {
                 width: 100%;
+                height: 45px;
+            }
+
+            .about {
+                margin: 1.5rem 0.8rem;
+                padding: 1.5rem 1rem;
+            }
+
+            .about-header h2 {
+                font-size: 1.6rem;
+            }
+
+            .about-header p {
+                font-size: 0.95rem;
+            }
+
+            .about-text h3 {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+
+            .about-text p {
+                font-size: 0.9rem;
+            }
+
+            .about-image {
+                height: 220px;
+                font-size: 100px;
+                margin: 1.5rem 0;
+            }
+
+            .why-choose {
+                padding: 1.5rem 0.8rem;
+                margin: 1.5rem 0;
+            }
+
+            .why-choose-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+
+            .why-card {
+                padding: 1.2rem;
+            }
+
+            .why-card-icon {
+                font-size: 2.2rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .why-card h4 {
+                font-size: 1rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .why-card p {
+                font-size: 0.85rem;
+                line-height: 1.5;
+            }
+
+            .team-section {
+                padding: 0 0.8rem;
+            }
+
+            .team-section h3 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .team-photo {
+                height: 220px;
+                font-size: 70px;
+            }
+
+            .team-info {
+                padding: 1.2rem;
+            }
+
+            .team-name {
+                font-size: 1rem;
+            }
+
+            .team-role {
+                font-size: 0.85rem;
+            }
+
+            .team-bio {
+                font-size: 0.8rem;
+            }
+
+            .values-section {
+                margin: 1.5rem 0.8rem;
+                padding: 1.5rem 1rem;
+            }
+
+            .values-section h3 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .values-grid {
+                gap: 1rem;
+            }
+
+            .value-item h4 {
+                font-size: 1rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .value-item p {
+                font-size: 0.85rem;
+            }
+
+            .testimonials {
+                padding: 0 0.8rem;
+            }
+
+            .testimonials h3 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .testimonial {
+                padding: 1.2rem;
+                border-left: 3px solid var(--accent-red);
+            }
+
+            .testimonial-text {
+                font-size: 0.85rem;
+                margin-bottom: 1rem;
+            }
+
+            .testimonial-author {
+                font-size: 0.95rem;
+            }
+
+            .testimonial-title {
+                font-size: 0.8rem;
+            }
+
+            .special-banner {
+                margin: 1.5rem 0.8rem;
+                padding: 1.2rem;
+            }
+
+            .special-banner h3 {
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .special-banner p {
+                font-size: 0.9rem;
+            }
+
+            footer {
+                padding: 1.5rem 0.8rem;
+            }
+
+            footer-content {
+                gap: 1.5rem;
+            }
+
+            footer h4 {
+                font-size: 1rem;
+                margin-bottom: 0.8rem;
+            }
+
+            footer p, footer a {
+                font-size: 0.85rem;
+            }
+
+            footer li {
+                padding: 0.3rem 0;
+            }
+
+            footer-bottom {
+                padding: 1rem 0;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Extra Small Devices - 360px */
+        @media (max-width: 360px) {
+            .logo {
+                font-size: 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 1.4rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .cake-showcase {
+                max-width: 150px;
+                height: 150px;
+            }
+
+            .product-name {
+                font-size: 1rem;
             }
         }
     </style>
@@ -831,14 +1292,18 @@
     <header>
         <nav>
             <div class="logo"> Delight Cake</div>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#products">Products</a></li>
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#contact">Contact us</a></li>
-                <li><a href="#login" class="cart-link">Log in </a></li>
-                <li><a href="#cart" class="cart-link"> Cart</a></li>
+                <!--<li><a href="#cart" class="cart-link">Log in Cart</a></li>-->
             </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
 
@@ -851,7 +1316,7 @@
         </div>
         <div class="hero-image">
             <div class="cake-showcase">
-                <img src="assets/bannar.png" alt="Cake">
+                <img src="assets/bannar.png" alt="bannar">
             </div>
         </div>
     </section>
@@ -869,7 +1334,7 @@
         <div class="products-grid">
             <!-- Strawberry Delight Cake -->
             <div class="product-card">
-                <div class="product-image product-strawberry"><img src="assets/straberry.png" alt="Strawberry Cake"></div>
+                <div class="product-image product-strawberry"><img src="assets/straberry.png" alt="bannar"></div>
                 <div class="product-info">
                     <h3 class="product-name">Strawberry Delight</h3>
                     <p class="product-description">A soft, fluffy sponge layered with luscious fresh strawberry compote and silky whipped cream. Perfect for celebrations.</p>
@@ -882,18 +1347,18 @@
                             <span class="star">★</span>
                             <span class="rating-text">4.8 (245)</span>
                         </div>
-                        <div class="price-tag">₹59</div>
+                      <!--<div class="price-tag">₹599</div>-->
                     </div>
-                    <div class="product-footer">
+                    <!--<div class="product-footer">
                         <button class="add-to-cart">Add to Cart</button>
                         <button class="wishlist">♡</button>
-                    </div>
+                    </div>-->
                 </div>
             </div>
 
             <!-- Blueberry Cake -->
             <div class="product-card">
-                <div class="product-image product-blueberry"><img src="assets/blueberry.png" alt="blueberry" ></div>
+                <div class="product-image product-blueberry"><img src="assets/blueberry.png" alt="blueberry"></div>
                 <div class="product-info">
                     <h3 class="product-name">Blueberry Bliss</h3>
                     <p class="product-description">A soft and moist sponge infused with the rich, tangy sweetness of fresh blueberries. Layered with smooth whipped cream for elegance.</p>
@@ -906,18 +1371,18 @@
                             <span class="star">★</span>
                             <span class="rating-text">4.9 (312)</span>
                         </div>
-                        <div class="price-tag">₹64</div>
+                        <!--<div class="price-tag">₹649</div>-->
                     </div>
                     <div class="product-footer">
-                        <button class="add-to-cart">Add to Cart</button>
-                        <button class="wishlist">♡</button>
+                        <!--<button class="add-to-cart">Add to Cart</button>
+                        <button class="wishlist">♡</button>-->
                     </div>
                 </div>
             </div>
 
             <!-- Orange Cake -->
             <div class="product-card">
-                <div class="product-image product-orange"><img src="assets/orange.png" alt="orange" ></div>
+                <div class="product-image product-orange"><img src="assets/orange.png" alt="orange"></div>
                 <div class="product-info">
                     <h3 class="product-name">Orange Zest Cake</h3>
                     <p class="product-description">A light and fluffy sponge infused with refreshing citrus zest. Soaked in delicate orange syrup for a burst of bright flavor.</p>
@@ -929,18 +1394,18 @@
                             <span class="star">★</span>
                             <span class="rating-text">4.7 (198)</span>
                         </div>
-                        <div class="price-tag">₹54</div>
+                       <!--- <div class="price-tag">₹549</div>-->
                     </div>
                     <div class="product-footer">
-                        <button class="add-to-cart">Add to Cart</button>
-                        <button class="wishlist">♡</button>
+                        <!--<button class="add-to-cart">Add to Cart</button>
+                        <button class="wishlist">♡</button>-->
                     </div>
                 </div>
             </div>
 
             <!-- Chocolate Cake -->
             <div class="product-card">
-                <div class="product-image product-chocolate"><img src="assets/chocolate.png" alt="chocolate" ></div>
+                <div class="product-image product-chocolate"><img src="assets/chocolate.png" alt="chocolate"></div>
                 <div class="product-info">
                     <h3 class="product-name">Chocolate Decadence</h3>
                     <p class="product-description">A rich and indulgent chocolate cake crafted for true chocolate lovers. Layers of deep cocoa sponge with silky chocolate cream.</p>
@@ -953,18 +1418,18 @@
                             <span class="star">★</span>
                             <span class="rating-text">4.9 (401)</span>
                         </div>
-                        <div class="price-tag">₹69</div>
+                        <!--<div class="price-tag">₹699</div>-->
                     </div>
                     <div class="product-footer">
-                        <button class="add-to-cart">Add to Cart</button>
-                        <button class="wishlist">♡</button>
+                        <!--<button class="add-to-cart">Add to Cart</button>
+                        <button class="wishlist">♡</button>-->
                     </div>
                 </div>
             </div>
 
             <!-- Vanilla Velvet Cake -->
-            <div class="product-card">
-                <div class="product-image product-strawberry"><img src="assets/vanill velvet.png" alt="vanilla"></div>
+            <!--<div class="product-card">
+                <div class="product-image product-strawberry">✨</div>
                 <div class="product-info">
                     <h3 class="product-name">Vanilla Velvet</h3>
                     <p class="product-description">Classic elegance meets modern luxury. Velvety smooth vanilla cake with premium pastry cream and fresh whipped topping.</p>
@@ -976,18 +1441,18 @@
                             <span class="star">★</span>
                             <span class="rating-text">4.6 (156)</span>
                         </div>
-                        <div class="price-tag">₹49</div>
+                        <div class="price-tag">₹499</div>
                     </div>
                     <div class="product-footer">
                         <button class="add-to-cart">Add to Cart</button>
                         <button class="wishlist">♡</button>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
             <!-- Red Velvet Cake -->
-            <div class="product-card">
-                <div class="product-image product-blueberry"><img src="assets/redvelvet.png" alt="redvelvate"></div>
+           <!--- <div class="product-card">
+                <div class="product-image product-blueberry">💎</div>
                 <div class="product-info">
                     <h3 class="product-name">Red Velvet Romance</h3>
                     <p class="product-description">Sophisticated and romantic. Crimson velvet layers with tangy cream cheese frosting. Perfect for special occasions.</p>
@@ -1000,7 +1465,7 @@
                             <span class="star">★</span>
                             <span class="rating-text">4.8 (289)</span>
                         </div>
-                        <div class="price-tag">₹74</div>
+                        <div class="price-tag">₹749</div>
                     </div>
                     <div class="product-footer">
                         <button class="add-to-cart">Add to Cart</button>
@@ -1008,7 +1473,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
     </section>
 
     <!-- About Section -->
@@ -1025,12 +1490,12 @@
                 <p>Our founder, Sarah, grew up in a family where every special occasion was marked by homemade desserts. This childhood inspiration ignited her passion for baking and led to the creation of Delight Cake. Today, we continue that tradition with modern techniques and premium ingredients.</p>
                 <p>Every cake we bake is a labor of love, carefully crafted to ensure that each bite is a moment of pure delight. We believe that the best cakes are made with quality ingredients, creativity, and a genuine love for what we do.</p>
             </div>
-            <div class="about-image"><img src="assets/aboutcake.jpg" alt="aboutCake"></div>
+            <div class="about-image"><img src="assets/aboutcake.jpg" alt="about"></div>
         </div>
 
         <!-- Why Choose Us Section -->
         <div class="why-choose">
-            <h3 style="text-align: center; font-size: 2rem; color: var(--dark-text); margin-bottom: 2rem; font-weight: 700;">Why Choose Delight Cake?</h3>
+            <h3 style="text-align: center; font-size: 2rem; color: var(--dark-text); margin-bottom: 2rem; font-weight: 700; padding: 0 1rem;">Why Choose Delight Cake?</h3>
             <div class="why-choose-grid">
                 <div class="why-card">
                     <div class="why-card-icon">🍰</div>
@@ -1070,7 +1535,7 @@
             <h3>Meet Our Master Bakers</h3>
             <div class="team-grid">
                 <div class="team-member">
-                    <div class="team-photo"><img src="assets/chef1.jpg" alt="chef1"></div>
+                    <div class="team-photo"><img src="assets/chef1.jpg" alt="c1"></div>
                     <div class="team-info">
                         <div class="team-name">Sarah Johnson</div>
                         <div class="team-role">Founder & Head Baker</div>
@@ -1078,7 +1543,7 @@
                     </div>
                 </div>
                 <div class="team-member">
-                    <div class="team-photo"><img src="assets/chef3.jpg" alt="chef3"></div>
+                    <div class="team-photo"><img src="assets/chef3.jpg" alt="c3"></div>
                     <div class="team-info">
                         <div class="team-name">Rajesh Kumar</div>
                         <div class="team-role">Master Pastry Chef</div>
@@ -1086,7 +1551,7 @@
                     </div>
                 </div>
                 <div class="team-member">
-                    <div class="team-photo"><img src="assets/chef2.jpg" alt="chef2"></div>
+                    <div class="team-photo"><img src="assets/chef2.jpg" alt="c2"></div>
                     <div class="team-info">
                         <div class="team-name">Priya Sharma</div>
                         <div class="team-role">Cake Designer</div>
@@ -1205,11 +1670,28 @@
             </div>
         </footer-content>
         <footer-bottom>
-            <p>&copy; 2026 Delight Cake. All rights reserved. | Handcrafted with ❤️</p>
+            <p> 2026 Delight Cake. All rights reserved. | Handcrafted with ❤️</p>
         </footer-bottom>
     </footer>
 
     <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
         // Add to Cart functionality
         document.querySelectorAll('.add-to-cart').forEach(btn => {
             btn.addEventListener('click', function() {
