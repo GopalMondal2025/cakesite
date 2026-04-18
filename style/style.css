@@ -824,6 +824,46 @@ footer a:hover {
 
 /* ============== MOBILE RESPONSIVE - 480px and below ============== */
 @media (max-width: 480px) {
+  /*added for glass effect mobile*/
+    header {
+        transition: all 0.3s ease;
+    }
+
+    /* Glass effect on scroll (mobile) */
+    header.scrolled {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 0.3rem 0;
+    }
+
+    /* Keep full width on mobile */
+    header.scrolled nav {
+        max-width: 100%;
+        padding: 0.3rem 1rem;
+    }
+
+    /* Slight logo shrink */
+    header.scrolled .logo {
+        font-size: 1.2rem;
+    }
+
+    /* Fix mobile menu background (important) */
+    .nav-links {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        background: rgba(245, 169, 169, 0.9); /* keep visibility */
+    }
+
+
+   /*end addition*/
+
+
+
+
+
+
+
     header {
         padding: 0.8rem 0;
     }
@@ -1037,4 +1077,40 @@ footer a:hover {
     .product-name {
         font-size: 1rem;
     }
+}
+
+
+
+
+/*logic for navbar
+
+
+/* Default header transition */
+header {
+    transition: all 0.4s ease;
+}
+
+/* Scroll state */
+header.scrolled {
+    background: rgba(255, 255, 255, 0.15); /* transparent glass */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    padding: 0.4rem 0;
+}
+
+/* Shrink nav width */
+header.scrolled nav {
+    max-width: 1100px; /* smaller width */
+    padding: 0.3rem 1.5rem;
+}
+
+/* Optional: shrink logo */
+header.scrolled .logo {
+    font-size: 1.4rem;
+}
+
+/* Optional: tighten nav links */
+header.scrolled .nav-links {
+    gap: 1.2rem;
 }
